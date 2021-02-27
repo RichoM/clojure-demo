@@ -105,23 +105,45 @@
  (require '[ring.adapter.jetty :as jetty])
 
  (defn handler [request]
+   (clojure.pprint/pprint request)
+   (dotimes [_ 4] (println))
    {:status 200
     :headers {"Content-Type" "text/html"}
     :body "Hello world"})
 
- (jetty/run-jetty #'handler
-                  {:port 3000, :join? false})
- (def server *1)
+ (def server (jetty/run-jetty #'handler
+                              {:port 3000, :join? false}))
+
  (.stop server)
 
  (require '[ring.middleware.params :refer [wrap-params]])
 
- (jetty/run-jetty (wrap-params #'handler)
-                  {:port 3000, :join? false})
+ (def server (jetty/run-jetty (wrap-params #'handler)
+                              {:port 3000, :join? false}))
+
+
+ ;; HTML
+ (require '[hiccup.core :refer :all])
+ (require '[hiccup.page :as page])
+
+ (html [:div#foo.bar "Richo capo"])
+
+ (page/html5
+  [:p [:div#counter 0]]
+  [:p [:button#btn {:type "button"} "Press me!"]]
+  [:script "btn.onclick = function () { counter.innerText++; }"])
+
+ (defn handler [request]
+   {:status 200
+    :headers {"Content-Type" "text/html"}
+    :body (page/html5
+           [:p [:div#counter 0]]
+           [:p [:button#btn {:type "button"} "Press me!"]]
+           [:script "btn.onclick = function () { counter.innerText++; }"])})
 
  ;; Database rows
 
- ;; HTML
+
  ;; Parser
  ;; Config
 
