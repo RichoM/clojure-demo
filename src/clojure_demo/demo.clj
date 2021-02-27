@@ -142,11 +142,39 @@
            [:p [:button#btn {:type "button"} "Press me!"]]
            [:script "btn.onclick = function () { counter.innerText++; }"])})
 
- ;; Database rows
+ ;; Database
+ (require '[conman.core :as conman])
 
+ (def db (conman/connect! {:jdbc-url "jdbc:mysql://localhost:3306/clojure_demo?useSSL=false&user=guest&password=turingturing"}))
+ (conman/bind-connection db "clojure_demo/queries.sql")
+
+ (select-all-people)
+ (insert-person {:nombre "Gonzalo", :apellido "Zabala" :edad 40})
+ (update-person {:id 1, :nombre "Ricardo", :apellido "Moran", :edad 32})
+
+ (conman/disconnect! db)
 
  ;; Parser
- ;; Config
+ (require '[petitparser.core :as pp])
+
+ (def grammar {:start (pp/end :term)
+               :term (pp/or :add :prod)
+               :prod (pp/or :mul :prim)
+               :prim (pp/or :parens :number)
+               :add [:prod (pp/trim "+" pp/space) :term]
+               :mul [:prim (pp/trim "*" pp/space) :prod]
+               :parens [(pp/trim "(" pp/space) :term (pp/trim ")" pp/space)]
+               :number (pp/trim (pp/flatten (pp/plus pp/digit)) pp/space)})
+
+ (def transformations {:number read-string
+                       :parens second
+                       :add (fn [[a _ b]] (+ a b))
+                       :mul (fn [[a _ b]] (* a b))})
+
+ (def parser (pp/compose grammar transformations))
+
+ (pp/parse parser "1 + 2 * 3")
+ (pp/parse parser "(1 + 2) * 3")
 
  ;; What about mutable state?
  ;; Atoms (@, swap!, reset!, ...)

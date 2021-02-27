@@ -9,7 +9,10 @@
                  [ring/ring-core "1.7.1"] ; web-framework
                  [ring/ring-jetty-adapter "1.7.1"] ; jetty webserver
                  [hiccup "1.0.5"] ; html generator
-                 ]
+                 [conman "0.8.3"] ; database connection
+                 [com.layerware/hugsql "0.5.1"] ; sql data-access
+                 [mysql/mysql-connector-java "8.0.12"]
+                 [clj-petitparser "0.1.0-SNAPSHOT"]]
   :main ^:skip-aot clojure-demo.core
   :target-path "target/%s"
   :profiles {:uberjar {:aot :all
