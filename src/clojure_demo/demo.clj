@@ -95,8 +95,13 @@
 
 
  ;; Maps are used to represent almost everything
- ;; HTTP request/response
  ;; JSON
+ (require '[cheshire.core :as json])
+
+ (json/decode (slurp "data.json"))
+ (spit "richo.json" (json/encode richo {:pretty true}))
+
+ ;; HTTP request/response
  ;; Database rows
  ;; HTML
  ;; Parser
