@@ -127,6 +127,7 @@
  (require '[hiccup.page :as page])
 
  (html [:div#foo.bar "Richo capo"])
+ (html [:img {:src "imagen.jpg"}])
 
  (page/html5
   [:p [:div#counter 0]]
