@@ -102,7 +102,25 @@
  (spit "richo.json" (json/encode richo {:pretty true}))
 
  ;; HTTP request/response
+ (require '[ring.adapter.jetty :as jetty])
+
+ (defn handler [request]
+   {:status 200
+    :headers {"Content-Type" "text/html"}
+    :body "Hello world"})
+
+ (jetty/run-jetty #'handler
+                  {:port 3000, :join? false})
+ (def server *1)
+ (.stop server)
+
+ (require '[ring.middleware.params :refer [wrap-params]])
+
+ (jetty/run-jetty (wrap-params #'handler)
+                  {:port 3000, :join? false})
+
  ;; Database rows
+
  ;; HTML
  ;; Parser
  ;; Config
