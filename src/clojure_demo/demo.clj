@@ -161,10 +161,10 @@
                :term (pp/or :add :prod)
                :prod (pp/or :mul :prim)
                :prim (pp/or :parens :number)
-               :add [:prod (pp/trim "+" pp/space) :term]
-               :mul [:prim (pp/trim "*" pp/space) :prod]
-               :parens [(pp/trim "(" pp/space) :term (pp/trim ")" pp/space)]
-               :number (pp/trim (pp/flatten (pp/plus pp/digit)) pp/space)})
+               :add [:prod (pp/trim "+") :term]
+               :mul [:prim (pp/trim "*") :prod]
+               :parens [(pp/trim "(") :term (pp/trim ")")]
+               :number (pp/trim (pp/flatten (pp/plus pp/digit)))})
 
  (def transformations {:number read-string
                        :parens second
