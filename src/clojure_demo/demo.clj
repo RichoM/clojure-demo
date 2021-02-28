@@ -27,12 +27,12 @@
 
  ;; Vars
  (def richo {:first-name "Jorge"
-              :middle-name "Ricardo"
-              :last-name "Moran"
-              :birth-date {:year 1998, :month 4, :day 7}
-              :addresses ["Avenida Siempreviva 742"
-                          "221B Baker Street"
-                          "Privet Drive 4"]})
+             :middle-name "Ricardo"
+             :last-name "Moran"
+             :birth-date {:year 1998, :month 4, :day 7}
+             :addresses ["Avenida Siempreviva 742"
+                         "221B Baker Street"
+                         "Privet Drive 4"]})
 
  richo
  (:first-name richo)
@@ -178,6 +178,36 @@
 
  ;; What about mutable state?
  ;; Atoms (@, swap!, reset!, ...)
+
+ (def counter (atom 0))
+
+ counter
+
+ @counter
+
+ (swap! counter inc)
+
+ (reset! counter 0)
+
+
+
+
+ (def player (atom {:name "Ash", :level 1,
+                    :party ["Pikachu" "Pidgey" "Caterpie"]}))
+
+ @player
+
+ (swap! player update :level inc)
+ (swap! player assoc :name "Red")
+ (swap! player update :party conj "Charmander")
+
+ (swap! player
+        (fn [p]
+          (-> p
+              (update :level inc)
+              (assoc :name "Gary")
+              (update :party conj "Bulbasaur"))))
+
  ;; Atoms are thread-safe (data race example C# vs clj)
 
  ;; What about polymorphism?
