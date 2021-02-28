@@ -211,9 +211,9 @@
 
  (swap! game-state
         #(-> %
-            (update-in [:player :level] inc)
-            (assoc-in [:player :name] "Blue")
-            (update-in [:player :party] conj "Bulbasaur")))
+             (update-in [:player :level] inc)
+             (assoc-in [:player :name] "Blue")
+             (update-in [:player :party] conj "Bulbasaur")))
 
  (macroexpand '(-> "richo"
                    str/upper-case
@@ -252,8 +252,73 @@
 
  ;; What about polymorphism?
  ;; Geometric shapes example
- ;; Multimethods
- ;; Protocols/Types/Records
 
+ (defn make-circle [r] {:type :circle, :radius r})
+ (defn make-triangle [b h] {:type :triangle, :base b, :height h})
+ (defn make-square [s] {:type :square, :side s})
+ (defn make-rectangle [l w] {:type :rectangle, :length l, :width w})
+
+ (defn area [shape]
+   (case (:type shape)
+     :circle (* Math/PI
+                (:radius shape)
+                (:radius shape))
+     :triangle (* 1/2
+                  (:base shape)
+                  (:height shape))
+     :square (* (:side shape)
+                (:side shape))
+     :rectangle (* (:length shape)
+                   (:width shape))
+     (throw (Exception. "Unknown shape"))))
+
+ (area (make-rectangle 3 5))
+
+
+ (defmulti area :type)
+
+ (defmethod area :circle [shape]
+   (* Math/PI
+      (:radius shape)
+      (:radius shape)))
+
+ (defmethod area :triangle [shape]
+   (* 1/2
+      (:base shape)
+      (:height shape)))
+
+ (defmethod area :square [shape]
+   (* (:side shape)
+      (:side shape)))
+
+ (defmethod area :rectangle [shape]
+   (* (:length shape)
+      (:width shape)))
+
+ (defmethod area :default [shape]
+   (throw (Exception. "Unknown shape")))
+
+ (area nil)
+
+ ;; Multimethods are flexible
+
+ (defmulti encounter (fn [x y] [(:species x) (:species y)]))
+
+ (defmethod encounter [:bunny :lion] [b l] :run-away)
+ (defmethod encounter [:lion :bunny] [l b] :eat)
+ (defmethod encounter [:lion :lion] [l1 l2] :fight)
+ (defmethod encounter [:bunny :bunny] [b1 b2] :mate)
+
+ (def bugs {:species :bunny, :name "Bugs Bunny"})
+ (def lola {:species :bunny, :name "Lola Bunny"})
+ (def mufasa {:species :lion, :name "Mufasa"})
+ (def scar {:species :lion, :name "Scar"})
+
+ (encounter bugs mufasa)
+ (encounter scar bugs)
+ (encounter mufasa scar)
+ (encounter bugs lola)
+
+ ;; Protocols/Types/Records
  ;; Future demos (macros? clojure.spec? core.async?)
  ,)
