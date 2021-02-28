@@ -1,7 +1,9 @@
 (ns clojure-demo.demo
-  (:require [clojure.string :as str]))
+  (:require [clojure.string :as str]
+            [clojure.pprint :refer [pprint]]))
 
 (comment
+
  ;; Primitive objects (numbers, ratios, strings, regex, keywords, ...)
  42
  3.141592
@@ -9,6 +11,7 @@
  "Hola mundo!"
  #"\s*(\d+\.\d+\.\d+\.\d+|localhost)\:(\d+)\s*"
  :name
+
 
  ;; Collections (list, vector, set, map)
  '(1 2 3 4)
@@ -105,8 +108,6 @@
  (require '[ring.adapter.jetty :as jetty])
 
  (defn handler [request]
-   (clojure.pprint/pprint request)
-   (dotimes [_ 4] (println))
    {:status 200
     :headers {"Content-Type" "text/html"}
     :body "Hello world"})
