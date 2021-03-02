@@ -1,5 +1,6 @@
 (ns clojure-demo.demo3-immutability
-  (:require [clojure.string :as str]))
+  (:require [clojure.string :as str]
+            [clojure.pprint :refer [pprint]]))
 
 (comment
 
@@ -8,26 +9,53 @@
 
  (conj [1 2 3] 4)
  (pop [1 2 3 4])
+
+ (conj '(1 2 3) 4)
+ (pop '(1 2 3 4))
+
+
+ (contains? #{1 2 3 4} 5)
+ (conj #{1 2 3 4} 5)
+ (disj #{1 2 3 4 5} 5)
+
+
  (assoc {:a 1, :b 2}
         :c 3)
+
+ (dissoc {:a 1, :b 2, :c 3} :b)
+
+ (select-keys {:a 1, :b 2, :c 3, :d 4, :e 5}
+              [:a :b])
+
+
+
+
 
  (def richo {:first-name "Jorge"
              :middle-name "Ricardo"
              :last-name "Moran"
-             :birth-date {:year 1998, :month 4, :day 7}
+             :birth-date {:year 1988, :month 4, :day 7}
              :addresses ["Avenida Siempreviva 742"
                          "221B Baker Street"
                          "Privet Drive 4"]})
 
- (assoc richo :nick-name "Richo")
- (assoc-in richo
-           [:birth-date :day-name]
-           "Jueves")
+ (pprint (assoc richo :nick-name "Richo"))
 
- (update {:count 0} :count inc)
 
- (update-in richo
-            [:addresses 2] str/upper-case)
+ (pprint (assoc-in richo
+                   [:birth-date :day-name]
+                   "Jueves"))
+
+ (update {:count 0}
+         :count inc)
+
+ (pprint (update-in richo
+                    [:addresses 2] str/upper-case))
+ 
+
+
+
+
 
 
 

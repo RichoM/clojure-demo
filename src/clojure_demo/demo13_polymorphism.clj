@@ -25,6 +25,7 @@
      (throw (Exception. "Unknown shape"))))
 
  (area (make-rectangle 3 5))
+ (area (make-triangle 2 3))
 
 
 
@@ -64,6 +65,7 @@
  (defmethod area :default [shape]
    (throw (Exception. "Unknown shape")))
 
- (area nil)
+ (area (make-rectangle 3 4))
+ 
 
  ,)

@@ -9,6 +9,12 @@
 
  (shout "Richo capo")
 
+
+
+
+
+
+
  (defn factorial [n]
    (if (<= n 1)
      n

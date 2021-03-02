@@ -1,5 +1,6 @@
 (ns clojure-demo.demo7-http
-  (:require [ring.adapter.jetty :as jetty]
+  (:require [clojure.pprint :refer [pprint]]
+            [ring.adapter.jetty :as jetty]
             [ring.middleware.params :refer [wrap-params]]))
 
 (comment
@@ -8,10 +9,10 @@
 
  (defn handler [request]
    (println "ACAACA")
-   (clojure.pprint/pprint request)
+   (pprint request)
    {:status 200
     :headers {"Content-Type" "text/html"}
-    :body "Richo capo"})
+    :body "Hello world"})
 
  (def server (jetty/run-jetty #'handler
                               {:port 3000, :join? false}))

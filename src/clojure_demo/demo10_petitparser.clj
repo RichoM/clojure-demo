@@ -4,7 +4,6 @@
 (comment
 
  ;; Parser
-
  (def grammar {:start (pp/end :term)
                :term (pp/or :add :prod)
                :prod (pp/or :mul :prim)
@@ -23,5 +22,7 @@
 
  (pp/parse parser "1 + 2 * 3")
  (pp/parse parser "(1 + 2) * 3")
+ (pp/parse parser "1 + (1 + 2) * 3 + 4")
+ (pp/parse parser "1 + (1 + 2) * (3 + 4)")
 
  ,)
