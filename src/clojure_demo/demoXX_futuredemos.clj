@@ -1,8 +1,7 @@
-(ns clojure-demo.demo15-futuredemos)
+(ns clojure-demo.demoXX-futuredemos)
 
 (comment
 
- ;; Protocols/Types/Records
  ;; Future demos (macros? clojure.spec? core.async?)
 
  ,)
