@@ -40,14 +40,12 @@
 
  (extend-type java.lang.String
    Shape
-   (area [self] "Los strings tampoco tienen área!"))
+   (area [self] "Los textos tampoco tienen área!"))
 
  (area "Richo")
 
  (map area
-      [1
-       "Richo"
-       (->Rectangle 4 3)])
+      [42 "Richo" (->Rectangle 4 3)])
 
 
  ,)
