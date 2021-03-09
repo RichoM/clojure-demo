@@ -44,23 +44,35 @@
  (def palo? #{:oro :espada :copa :basto})
  (def número? (into #{:sota :caballo :rey :ancho}
                     (range 2 10)))
- (def mazo (for [palo palo?
-                 num número?]
-             [num palo]))
+
+ (defn distinct-or-empty? [coll]
+   (or (empty? coll)
+       (apply distinct? coll)))
 
  (s/def ::carta (s/tuple número? palo?))
- (s/def ::mano (s/* ::carta))
+ (s/def ::mano (s/and (s/* ::carta)
+                      distinct-or-empty?))
 
  (s/def ::nombre string?)
  (s/def ::puntaje int?)
  (s/def ::jugador (s/keys :req [::nombre ::puntaje ::mano]))
 
- (s/def ::jugadores (s/* ::jugador))
- (s/def ::mazo (s/* ::carta))
- (s/def ::juego (s/keys :req [::jugadores ::mazo]))
+ (s/def ::jugadores (s/+ ::jugador))
+ (s/def ::mazo (s/and (s/* ::carta)
+                      distinct-or-empty?))
+
+ (defn all-cards [{:keys [::mazo ::jugadores]}]
+   (into mazo (mapcat ::mano jugadores)))
+
+ (s/def ::juego (s/and (s/keys :req [::jugadores ::mazo])
+                       (fn [juego]
+                         (distinct-or-empty? (all-cards juego)))))
 
 
- (def juego {::mazo mazo
+
+ (def juego {::mazo (for [palo palo?
+                          num número?]
+                      [num palo])
              ::jugadores [{::nombre "Richo!"
                            ::puntaje 100
                            ::mano []}
@@ -68,23 +80,49 @@
                            ::puntaje 50
                            ::mano []}]})
 
- (defn repartir [juego]
-   ,,,)
+
 
  (s/valid? ::jugador (get-in juego [::jugadores 0]))
 
  (s/valid? ::juego juego)
 
  (gen/generate (s/gen ::juego))
+ (gen/generate (s/gen ::jugador))
+
+ (s/exercise ::jugador)
+ (s/exercise ::juego)
+
+
+ (s/valid? ::mano (get j ::mano))
+ (s/valid? ::mano (get-in juego [::jugadores 0 ::mano]))
+
+ (apply distinct? (get j ::mano))
+ (def j *1)
+
+ (= (count (get j ::mano))
+    (count (distinct (get j ::mano))))
 
 
 
+ (defn repartir [{:keys [::jugadores ::mazo] :as juego}]
+   (let [manos (zipmap jugadores
+                       (partition-all (/ (count mazo)
+                                         (count jugadores))
+                                      (shuffle mazo)))]
+     (assoc juego
+            ::mazo []
+            ::jugadores (map (fn [jugador]
+                               (assoc jugador ::mano (manos jugador)))
+                             jugadores))))
+
+ (s/fdef repartir
+         :args (s/cat :juego ::juego)
+         :ret ::juego
+         :fn #(= (count (all-cards (-> % :args :juego)))
+                 (count (all-cards (-> % :ret)))))
 
 
-
-
-
-
+ (repartir juego)
 
 
 
