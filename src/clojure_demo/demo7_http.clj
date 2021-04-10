@@ -8,8 +8,6 @@
  ;; HTTP request/response
 
  (defn handler [request]
-   (println "ACAACA")
-   (pprint request)
    {:status 200
     :headers {"Content-Type" "text/html"}
     :body "Hello world"})
