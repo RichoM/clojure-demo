@@ -12,7 +12,7 @@
   (play-sound! (if success? "success.wav" "error.wav")))
 
 (defmethod report :summary [m]
-  (play! (and (zero? (:fail m))
+  #_(play! (and (zero? (:fail m))
               (zero? (:error m))))
   (with-test-out
     (println "\nRan" (:test m) "tests containing"
