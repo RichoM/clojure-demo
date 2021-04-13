@@ -42,6 +42,7 @@
 
 
 
+
  (defmulti area :type)
 
  (defmethod area :circle [shape]
@@ -66,6 +67,6 @@
    (throw (Exception. "Unknown shape")))
 
  (area (make-rectangle 3 4))
- 
+
 
  ,)

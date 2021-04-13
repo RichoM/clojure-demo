@@ -2,6 +2,6 @@
 
 (comment
 
- ;; Future demos (macros? clojure.spec? core.async?)
+ ;; Future demos (macros? testing? core.async?)
 
  ,)

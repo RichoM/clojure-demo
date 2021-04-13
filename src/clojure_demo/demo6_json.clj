@@ -4,10 +4,9 @@
 
 (comment
 
- ;; Maps are used to represent almost everything
  ;; JSON
 
- (pprint (json/decode (slurp "data.json")))
+ (json/decode (slurp "data.json"))
 
  (def richo {:first-name "Jorge"
              :middle-name "Ricardo"
