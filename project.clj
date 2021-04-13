@@ -13,7 +13,7 @@
                  [conman "0.8.3"] ; database connection
                  [com.layerware/hugsql "0.5.1"] ; sql data-access
                  [mysql/mysql-connector-java "8.0.12"]
-                 [clj-petitparser "0.1.0-SNAPSHOT"]]
+                 [clj-petitparser "0.1.1"]]
   :main ^:skip-aot clojure-demo.core
   :target-path "target/%s"
   :profiles {:uberjar {:aot :all
@@ -22,7 +22,8 @@
                                   [org.clojure/tools.cli "1.0.194"]
                                   [org.clojure/tools.namespace "0.3.1"]
                                   [org.clojars.beppu/clj-audio "0.3.0"]
-                                  [org.clojure/test.check "0.9.0"]]
+                                  [org.clojure/test.check "0.9.0"]
+                                  [criterium "0.4.6"]]
                    :plugins [[com.jakemccrary/lein-test-refresh "0.24.1"]]
                    :source-paths ["env/dev/clj"]
                    :repl-options {:init-ns user}}
