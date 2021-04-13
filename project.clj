@@ -8,6 +8,7 @@
                  [cheshire "5.9.0"] ; JSON
                  [compojure "1.6.2"] ; routing
                  [ring/ring-core "1.7.1"] ; web-framework
+                 [ring/ring-json "0.5.1"] ; JSON middleware
                  [ring/ring-jetty-adapter "1.7.1"] ; jetty webserver
                  [hiccup "1.0.5"] ; html generator
                  [conman "0.8.3"] ; database connection
