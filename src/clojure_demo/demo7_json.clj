@@ -1,4 +1,4 @@
-(ns clojure-demo.demo6-json
+(ns clojure-demo.demo7-json
   (:require [clojure.pprint :refer [pprint]]
             [cheshire.core :as json]))
 
