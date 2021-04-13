@@ -11,11 +11,19 @@
  (shout "Richo capo")
 
 
- (fn [n] (* n n))
+
+
+ (defn square [x] (* x x))
+
+ (map square (range 1 10))
+
 
  (map (fn [n] (* n n))
       (range 1 10))
 
+
+ (map #(* % %)
+      (range 1 10))
 
 
  (remove (fn [path] (str/starts-with? path "D:\\UAI\\GIRA\\UziScript\\.git"))
@@ -24,6 +32,11 @@
 
  (filter (fn [file] (str/ends-with? (.getName file) ".clj"))
          (file-seq (io/file "D:\\UAI\\GIRA\\UziScript")))
+
+
+
+
+
 
 
 
@@ -54,11 +67,46 @@
         (reduce *')))
 
 
-(defn factorial [n]
-  (loop [i 1, f 1]
-    (if (> i n)
-      f
-      (recur (inc i) (*' i f)))))
+ (defn factorial [n]
+   (loop [i 1, f 1]
+     (if (> i n)
+       f
+       (recur (inc i) (*' i f)))))
 
-  (factorial 10000)
+ (factorial 10000)
+
+
+
+
+
+
+
+
+ ;; Destructuring
+ (defn distance [point-1 point-2]
+   (Math/sqrt (+ (square (- (:x point-2) (:x point-1)))
+                 (square (- (:y point-2) (:y point-1))))))
+
+ (distance {:x 1, :y 2}
+           {:x 4, :y 6})
+
+
+ ;; Associative destructuring
+ (defn distance [{x1 :x, y1 :y} {x2 :x, y2 :y}]
+   (Math/sqrt (+ (square (- x2 x1))
+                 (square (- y2 y1)))))
+
+ (distance {:x 1, :y 2}
+           {:x 4, :y 6})
+
+
+
+ ;; Sequential destructuring
+ (defn distance [[x1 y1] [x2 y2]]
+   (Math/sqrt (+ (square (- x2 x1))
+                 (square (- y2 y1)))))
+
+ (distance [1 2] [4 6])
+
+
  ,)
