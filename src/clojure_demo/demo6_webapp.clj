@@ -72,14 +72,14 @@
      [:hr]
      [:div.row
       [:div.col.fs-3
-       [:div.row [:div.col-5 "Types:"] [:div.col-auto.fw-light (str/join ", " types)]]
+       [:div.row [:div.col "Types:"] [:div.col-sm.fw-light (str/join ", " types)]]
        [:div.mt-4.fw-bold "Base stats"]
-       [:div.row [:div.col-5 "HP:"] [:div.col-auto.fw-light hp]]
-       [:div.row [:div.col-5 "Attack:"] [:div.col-auto.fw-light attack]]
-       [:div.row [:div.col-5 "Defense:"] [:div.col-auto.fw-light defense]]
-       [:div.row [:div.col-5 "Speed:"] [:div.col-auto.fw-light speed]]
-       [:div.row [:div.col-5 "Sp. Attack:"] [:div.col-auto.fw-light sp_attack]]
-       [:div.row [:div.col-5 "Sp. Defense:"] [:div.col-auto.fw-light sp_defense]]]
+       [:div.row [:div.col "HP:"] [:div.col-sm.fw-light hp]]
+       [:div.row [:div.col "Attack:"] [:div.col-sm.fw-light attack]]
+       [:div.row [:div.col "Defense:"] [:div.col-sm.fw-light defense]]
+       [:div.row [:div.col "Speed:"] [:div.col-sm.fw-light speed]]
+       [:div.row [:div.col "Sp. Attack:"] [:div.col-sm.fw-light sp_attack]]
+       [:div.row [:div.col "Sp. Defense:"] [:div.col-sm.fw-light sp_defense]]]
       [:div.col
        [:img.img-fluid {:src "https://i.pinimg.com/736x/bf/d8/d7/bfd8d7704cf357fdc06f003e8bfdc272.jpg"}]]]
      [:hr]
