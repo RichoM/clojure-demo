@@ -13,41 +13,23 @@
  (take 9 (get-all-pokemons))
  (get-all-types)
 
- (def pokedex (json/decode (slurp "pokedex.json")))
+ (def pokedex (json/decode (slurp "pokedex.json") true))
 
- (def types (set (mapcat #(get % "type") pokedex)))
+ (def types (set (mapcat :types pokedex)))
 
-
- ; Populate type table
- (doseq [type types]
-   (insert-type! {:name type}))
-
- ; Populate pokemon table
  (conn/with-transaction [*db*]
-   (doseq [pokemon (map (fn [pokemon]
-                          (into {:id (pokemon "id"),
-                                 :name (get-in pokemon ["name" "english"])}
-                                (map (fn [[key val]]
-                                       [(-> (str key)
-                                            str/lower-case
-                                            (str/replace ". " "_")
-                                            keyword)
-                                        val])
-                                     (pokemon "base"))))
-                        pokedex)]
-     (insert-pokemon! pokemon)))
+   (doseq [type types]
+     (insert-type! {:name type}))
+   (doseq [pokemon pokedex]
+     (insert-pokemon! pokemon)
+     (doseq [type (:types pokemon)]
+       (add-pokemon-type! {:id (:id pokemon), :type type}))))
 
- ; Populate pokemon_type table
- (conn/with-transaction [*db*]
-   (doseq [{id "id", types "type"} (take 5 pokedex)]
-     (doseq [type types]
-       (try (add-pokemon-type! {:id id, :type type})
-         (catch Throwable _)))))
+ (get-pokemon-types (get-pokemon-by-id {:id 56}))
 
-
+ (let [pokemon (get-pokemon-by-id {:id 56})]
+   (assoc pokemon :types (mapv :name (get-pokemon-types pokemon))))
 
  (disconnect! *db*)
-
-
 
  ,)
