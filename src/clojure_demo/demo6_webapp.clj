@@ -81,7 +81,7 @@
        [:div.row [:div.col "Sp. Attack:"] [:div.col-sm.fw-light sp_attack]]
        [:div.row [:div.col "Sp. Defense:"] [:div.col-sm.fw-light sp_defense]]]
       [:div.col
-       [:img.img-fluid {:src "https://i.pinimg.com/736x/bf/d8/d7/bfd8d7704cf357fdc06f003e8bfdc272.jpg"}]]]
+       [:img.img-fluid {:src (str "https://raw.githubusercontent.com/fanzeyi/pokemon.json/master/images/" (format "%03d" id) ".png")}]]]
      [:hr]
      [:div.row.justify-content-between
       [:div.col-auto [:a {:href (str "/pokemon/" (dec id))} "<< Previous"]]
