@@ -71,15 +71,4 @@
              (update-in [:player :party] conj "Bulbasaur")))
 
 
-
- (macroexpand '(-> "richo"
-                   str/upper-case
-                   (str "!")
-                   println))
-
- (fn [a] (* a a))
- #(* % %)
-
- (macroexpand '#(* % %))
-
  ,)
