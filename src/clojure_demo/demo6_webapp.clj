@@ -64,28 +64,29 @@
                   pokedex)))
 
  (defn pokemon-page [{:keys [id name hp attack defense speed sp_attack sp_defense types]}]
-   (layout
-    [:div.container
-     [:div.row
-      [:div.col-auto [:h1.fst-italic (str "#" id)]]
-      [:div.col-auto [:h1 name]]]
-     [:hr]
-     [:div.row
-      [:div.col.fs-3
-       [:div.row [:div.col "Types:"] [:div.col-sm.fw-light (str/join ", " types)]]
-       [:div.mt-4.fw-bold "Base stats"]
-       [:div.row [:div.col "HP:"] [:div.col-sm.fw-light hp]]
-       [:div.row [:div.col "Attack:"] [:div.col-sm.fw-light attack]]
-       [:div.row [:div.col "Defense:"] [:div.col-sm.fw-light defense]]
-       [:div.row [:div.col "Speed:"] [:div.col-sm.fw-light speed]]
-       [:div.row [:div.col "Sp. Attack:"] [:div.col-sm.fw-light sp_attack]]
-       [:div.row [:div.col "Sp. Defense:"] [:div.col-sm.fw-light sp_defense]]]
-      [:div.col
-       [:img.img-fluid {:src (str "https://raw.githubusercontent.com/fanzeyi/pokemon.json/master/images/" (format "%03d" id) ".png")}]]]
-     [:hr]
-     [:div.row.justify-content-between
-      [:div.col-auto [:a {:href (str "/pokemon/" (dec id))} "<< Previous"]]
-      [:div.col-auto [:a {:href (str "/pokemon/" (inc id))} "Next >>"]]]]))
+   (if id
+     (layout
+      [:div.container
+       [:div.row
+        [:div.col-auto [:h1.fst-italic (str "#" id)]]
+        [:div.col-auto [:h1 name]]]
+       [:hr]
+       [:div.row
+        [:div.col.fs-3
+         [:div.row [:div.col "Types:"] [:div.col-sm.fw-light (str/join ", " types)]]
+         [:div.mt-4.fw-bold "Base stats"]
+         [:div.row [:div.col "HP:"] [:div.col-sm.fw-light hp]]
+         [:div.row [:div.col "Attack:"] [:div.col-sm.fw-light attack]]
+         [:div.row [:div.col "Defense:"] [:div.col-sm.fw-light defense]]
+         [:div.row [:div.col "Speed:"] [:div.col-sm.fw-light speed]]
+         [:div.row [:div.col "Sp. Attack:"] [:div.col-sm.fw-light sp_attack]]
+         [:div.row [:div.col "Sp. Defense:"] [:div.col-sm.fw-light sp_defense]]]
+        [:div.col
+         [:img.img-fluid {:src (str "https://raw.githubusercontent.com/fanzeyi/pokemon.json/master/images/" (format "%03d" id) ".png")}]]]
+       [:hr]
+       [:div.row.justify-content-between
+        [:div.col-auto [:a {:href (str "/pokemon/" (dec id))} "&laquo; Previous"]]
+        [:div.col-auto [:a {:href (str "/pokemon/" (inc id))} "Next &raquo;"]]]])))
 
 
  (defn layout [& content]
