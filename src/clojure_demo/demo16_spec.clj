@@ -32,7 +32,8 @@
  (s/explain-data ::circle "Richo")
 
 
- (gen/generate (s/gen ::rectangle))
+ (gen/generate (s/gen ::circle))
+ (gen/generate (s/gen ::triangle))
 
 
 
@@ -45,6 +46,7 @@
  (def número? (into #{:sota :caballo :rey :ancho}
                     (range 2 10)))
 
+
  (defn distinct-or-empty? [coll]
    (or (empty? coll)
        (apply distinct? coll)))
@@ -54,10 +56,12 @@
                       distinct-or-empty?))
 
  (s/def ::nombre string?)
- (s/def ::puntaje int?)
+ (s/def ::puntaje (s/or :pos pos-int?
+                        :zero zero?))
  (s/def ::jugador (s/keys :req [::nombre ::puntaje ::mano]))
 
- (s/def ::jugadores (s/+ ::jugador))
+ (s/def ::jugadores (s/and (s/+ ::jugador)
+                           #(< (count %) 5)))
  (s/def ::mazo (s/and (s/* ::carta)
                       distinct-or-empty?))
 
@@ -84,6 +88,18 @@
 
  (s/valid? ::jugador (get-in juego [::jugadores 0]))
 
+ (s/valid? ::jugador {::nombre "Richo!"
+                      ::puntaje 100
+                      ::mano [[4 :basto]
+                              [2 :oro]
+                              [2 :oro]]})
+
+ (s/explain ::jugador {::nombre "Richo!"
+                       ::puntaje 100
+                       ::mano [[4 :basto]
+                               [2 :oro]
+                               [2 :oro]]})
+
  (s/valid? ::juego juego)
 
  (gen/generate (s/gen ::juego))
@@ -91,16 +107,6 @@
 
  (s/exercise ::jugador)
  (s/exercise ::juego)
-
-
- (s/valid? ::mano (get j ::mano))
- (s/valid? ::mano (get-in juego [::jugadores 0 ::mano]))
-
- (apply distinct? (get j ::mano))
- (def j *1)
-
- (= (count (get j ::mano))
-    (count (distinct (get j ::mano))))
 
 
 
@@ -111,8 +117,7 @@
                                       (shuffle mazo)))]
      (assoc juego
             ::mazo []
-            ::jugadores (map (fn [jugador]
-                               (assoc jugador ::mano (manos jugador)))
+            ::jugadores (map #(assoc % ::mano (manos %))
                              jugadores))))
 
  (s/fdef repartir
@@ -125,7 +130,7 @@
  (repartir juego)
 
 
-
+ ;; TODO(Richo): Cómo instrumentar el código para que valide la invariante??
 
 
 
