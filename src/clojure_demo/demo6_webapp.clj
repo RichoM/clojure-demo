@@ -8,7 +8,8 @@
             [compojure.core :refer :all]
             [compojure.route :as route]
             [cheshire.core :as json]
-            [hiccup.page :as page]))
+            [hiccup.page :as page]
+            [conman.core :refer [connect! disconnect! bind-connection] :as conn]))
 
 (comment
 
@@ -101,4 +102,12 @@
      [:script {:src "https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta3/dist/js/bootstrap.bundle.min.js"
                :integrity "sha384-JEW9xMcG8R+pH31jmWH6WWP0WintQrMb4s7ZOdauHnUtxwoG2vI5DkLtS3qm9Ekf"
                :crossorigin "anonymous"}]]))
+
+ (def ^:dynamic *db* (connect! {:jdbc-url "jdbc:mysql://localhost:3306/pokedex?useSSL=false&user=guest&password=turingturing"}))
+ (bind-connection *db* "clojure_demo/queries.sql")
+
+ (defn find-pokemon [id]
+   (if-let [pokemon (get-pokemon-by-id {:id id})]
+     (assoc pokemon :types (mapv :name (get-pokemon-types pokemon)))))
+
  ,)
