@@ -26,12 +26,14 @@
       (range 1 10))
 
 
- (remove (fn [path] (str/starts-with? path "D:\\UAI\\GIRA\\UziScript\\.git"))
-         (map (fn [file] (.getPath file))
-              (file-seq (io/file "D:\\UAI\\GIRA\\UziScript"))))
 
- (filter (fn [file] (str/ends-with? (.getName file) ".clj"))
-         (file-seq (io/file "D:\\UAI\\GIRA\\UziScript")))
+ (remove (fn [path] (str/starts-with? path "/Users/richo/UziScript/.git"))
+         (map (fn [file] (.getPath file))
+              (file-seq (io/file "/Users/richo/UziScript"))))
+
+ (count (filter (fn [name] (str/ends-with? name ".clj"))
+                (map (fn [file] (.getName file))
+                     (file-seq (io/file "/Users/richo/UziScript")))))
 
 
 

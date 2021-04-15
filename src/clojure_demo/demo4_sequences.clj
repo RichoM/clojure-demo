@@ -15,20 +15,12 @@
 
 
  ;; Sequences can be infinite
- (set! *print-length* 100)
 
  (range)
  (take 10 (filter odd? (range)))
 
  (repeatedly rand)
- (iterate inc 0)
- (file-seq (io/file "D:\\UAI\\GIRA\\UziScript"))
-
-
-
-
-
-
-
+ (iterate inc -100)
+ (file-seq (io/file "/Users/richo/UziScript"))
 
  ,)

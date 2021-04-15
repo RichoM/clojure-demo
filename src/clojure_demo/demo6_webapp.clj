@@ -110,7 +110,9 @@
 
  (defn find-pokemon [id]
    (if-let [pokemon (get-pokemon-by-id {:id id})]
-     (assoc pokemon :types (mapv :name (get-pokemon-types pokemon)))))
+     (assoc pokemon
+            :types (mapv :name
+                         (get-pokemon-types pokemon)))))
 
  (add-pokemon-type! {:id 4, :type "Water"})
 
