@@ -32,6 +32,10 @@
  (map (comp area ->Square)
       (range 10))
 
+
+
+
+
  (extend-type java.lang.Number
    Shape
    (area [self] "Los números no tienen área"))

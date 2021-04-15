@@ -12,9 +12,10 @@
 
  @counter
 
+ (reset! counter 10)
+
  (swap! counter inc)
 
- (reset! counter 0)
 
 
 
@@ -52,7 +53,7 @@
           :rival {:name "Gary", :level 10,
                   :party ["Raichu" "Pidgeot" "Butterfree"]}}))
 
- (pprint @game-state)
+ @game-state
 
  (swap! game-state update-in [:player :level] inc)
  (get-in @game-state [:player :level])
@@ -69,6 +70,11 @@
              (update-in [:player :level] inc)
              (assoc-in [:player :name] "Blue")
              (update-in [:player :party] conj "Bulbasaur")))
+
+
+
+
+
 
 
  ,)

@@ -25,10 +25,8 @@
      (doseq [type (:types pokemon)]
        (add-pokemon-type! {:id (:id pokemon), :type type}))))
 
- (get-pokemon-types (get-pokemon-by-id {:id 56}))
-
- (let [pokemon (get-pokemon-by-id {:id 56})]
-   (assoc pokemon :types (mapv :name (get-pokemon-types pokemon))))
+ (get-pokemon-by-id {:id 185})
+ (get-pokemon-types (get-pokemon-by-id {:id 185}))
 
  (disconnect! *db*)
 

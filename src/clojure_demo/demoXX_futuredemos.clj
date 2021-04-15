@@ -2,6 +2,6 @@
 
 (comment
 
- ;; Future demos (macros? testing? core.async?)
+ ;; Future demos (migrations? testing? core.async?)
 
  ,)
