@@ -24,8 +24,8 @@
    (area [self] (* length width)))
 
 
- (area (Circle. 5))
- (area (Triangle. 3 4))
+ (area (->Circle 5))
+ (area (->Triangle 3 4))
 
  (area (->Triangle 3 4))
 
