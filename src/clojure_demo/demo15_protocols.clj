@@ -7,19 +7,19 @@
  (defprotocol Shape
    (area [self]))
 
- (deftype Circle [radius]
+ (defrecord Circle [radius]
    Shape
    (area [self] (* Math/PI radius radius)))
 
- (deftype Triangle [base height]
+ (defrecord Triangle [base height]
    Shape
    (area [self] (* 1/2 base height)))
 
- (deftype Square [side]
+ (defrecord Square [side]
    Shape
    (area [self] (* side side)))
 
- (deftype Rectangle [length width]
+ (defrecord Rectangle [length width]
    Shape
    (area [self] (* length width)))
 
