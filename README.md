@@ -5,7 +5,6 @@
     2. Estructuras de datos literales (listas, vectores, maps, sets)
     3. Secuencias
     4. Funciones
-
 2. Ejemplo 1: Aplicación web
     1. Request/Response
     2. Middlewares
