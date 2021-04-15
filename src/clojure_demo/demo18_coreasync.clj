@@ -1,4 +1,4 @@
-(ns demo18-coreasync
+(ns clojure-demo.demo18-coreasync
   (:require [clojure.core.async :as async :refer :all])
   (:import [java.util Date]))
 

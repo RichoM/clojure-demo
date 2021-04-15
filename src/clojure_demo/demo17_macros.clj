@@ -1,4 +1,4 @@
-(ns demo17-macros)
+(ns clojure-demo.demo17-macros)
 
 (comment
 
@@ -17,7 +17,7 @@
    "Use this macro when you pine for the notation of your childhood"
    [infixed]
    (list (second infixed) (first infixed) (last infixed)))
-unless
+
  (backwards (3 4 +))
 
  (macroexpand '(-> "richo"
