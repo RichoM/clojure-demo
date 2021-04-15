@@ -2,6 +2,11 @@
 
 (comment
 
- ;; Future demos (migrations? testing? core.async?)
+ ; Future demos:
+ ;; * migrations?
+ ;; * testing?
+ ;; * core.async?
+ ;; * clojurescript?
+ ;; * deployment?
 
  ,)
