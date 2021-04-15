@@ -15,6 +15,8 @@
     6. Database access
 
 3. Ejemplo 2: Petitparser
+    1. Gramática
+    2. Transformaciones
 
 5. Mutable state
     1. Atoms
