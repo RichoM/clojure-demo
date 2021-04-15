@@ -27,6 +27,7 @@
                                   [criterium "0.4.6"]]
                    :plugins [[com.jakemccrary/lein-test-refresh "0.24.1"]]
                    :source-paths ["env/dev/clj"]
-                   :repl-options {:init-ns user}}
+                   :repl-options {:init-ns user}
+                   :global-vars {*print-length* 100}}
              :test {:resource-paths ["env/test/sounds"]
                     :source-paths ["env/test/clj"]}})
