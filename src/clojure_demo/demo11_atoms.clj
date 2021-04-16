@@ -45,7 +45,7 @@
 
 
 
-
+ ;; Atoms can reference more complex data
 
  (def game-state
    (atom {:player {:name "Ash", :level 1,

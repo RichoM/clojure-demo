@@ -27,6 +27,8 @@
  (area (make-rectangle 3 5))
  (area (make-triangle 2 3))
 
+ ;; Cuál es el problema con esta implementación?
+ ;; Qué pasa si la quiero extender con una nueva figura geométrica?
 
 
 
@@ -41,7 +43,7 @@
 
 
 
-
+ ;; Enter multimethods!
 
  (defmulti area :type)
 

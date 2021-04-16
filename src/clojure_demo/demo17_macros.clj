@@ -9,13 +9,10 @@
  (macroexpand '(dotimes [i 5]
                         (println i)))
 
- (defmacro backwards
-   [form]
+ (defmacro backwards [form]
    (reverse form))
 
- (defmacro infix
-   "Use this macro when you pine for the notation of your childhood"
-   [infixed]
+ (defmacro infix [infixed]
    (list (second infixed) (first infixed) (last infixed)))
 
  (backwards (3 4 +))

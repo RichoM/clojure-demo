@@ -34,7 +34,7 @@
 
 
 
-
+ ;; Puedo extender tipos existentes de Java
 
  (extend-type java.lang.Number
    Shape
